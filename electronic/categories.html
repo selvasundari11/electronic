@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroMart</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    /* --- Variables & Global Styling --- */
+:root {
+    --primary-text: #333;
+    --background-light: #f4f4f4; /* Light background for the category bar */
+    --card-bg-light: #e0f7fa; /* Light cyan/blue for the product grid background */
+    --accent-color: #00bfff; /* Bright cyan/blue for buttons/tags */
+    --accent-hover: #0099cc;
+    --star-color: #ffc700; /* Gold color for stars */
+    --font-family: Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.product-listing-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    font-family: var(--font-family);
+    color: var(--primary-text);
+    padding: 0 15px;
+}
+
+/* --- Product Categories Section --- */
+.filter-sort-bar {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.section-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* --- Filter and Sort Controls --- */
+.categories-bar {
+    border: 1px solid var(--background-light);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fff; /* White background for the bar itself */
+}
+
+.controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.control-icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.categories-title {
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.categories-list {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap; /* Allows categories to wrap on small screens */
+}
+
+.category-item {
+    text-decoration: none;
+    color: var(--primary-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+    min-width: 150px; /* Base width for desktop items */
+}
+
+.category-image-wrapper {
+    width: 100%;
+    max-width: 150px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.category-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.category-tag {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* --- Product Grid Styling --- */
+.product-grid {
+    background-color: var(--card-bg-light);
+    padding: 30px 15px;
+    display: grid;
+    /* Use CSS Grid for a cleaner, consistent 4-column layout */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    border-radius: 8px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes button to the bottom */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-image-wrapper {
+    padding: 10px;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 150px; /* Control image size */
+    height: auto;
+    object-fit: contain;
+}
+
+.product-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.product-rating {
+    color: var(--star-color);
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.star-filled {
+    line-height: 1;
+}
+
+.product-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.buy-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.buy-button:hover {
+    background-color: var(--accent-hover);
+}
+
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet/Medium Screens (Below 992px) */
+@media (max-width: 992px) {
+    .product-grid {
+        /* Change from 4 to 3 columns on tablets */
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .category-item {
+        min-width: 120px;
+    }
+}
+
+/* Small Tablets/Large Mobile (Below 768px) */
+@media (max-width: 768px) {
+    .product-grid {
+        /* Change from 3 to 2 columns on mobile/small tablets */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .categories-list {
+        /* Allow categories to wrap more aggressively */
+        gap: 8px;
+    }
+    
+    .category-item {
+        min-width: 100px;
+        flex: 1 1 20%; /* Each takes about 20% width to ensure 4 fit */
+    }
+    
+    .category-tag {
+        padding: 5px 10px;
+    }
+}
+
+/* Mobile/Small Screens (Below 576px) */
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.3em;
+    }
+
+    .controls-wrapper {
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .categories-bar {
+        padding: 15px;
+    }
+    
+    .categories-list {
+        justify-content: space-between;
+    }
+
+    .category-item {
+        flex: 1 1 45%; /* Stack in two columns */
+        margin-bottom: 15px;
+    }
+    
+    .category-image-wrapper {
+        height: 100px;
+    }
+    
+    .product-grid {
+        /* Stack cards in a single column for maximum readability */
+        grid-template-columns: 1fr;
+        padding: 20px 10px;
+    }
+}
+
+
+.product-listing-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    font-family: var(--font-family);
+    color: var(--primary-text);
+    padding: 0 15px;
+}
+
+/* --- Filter and Sort Bar Styling --- */
+.filter-sort-bar {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.section-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px; 
+    margin: 0 auto 30px auto; 
+    font-weight: 500;
+    color: var(--primary-text);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    cursor: pointer;
+    border: 1px solid var(--primary-text);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.control-icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+/* --- Product Categories Section --- */
+.categories-bar {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px 10px;
+    margin-bottom: 30px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.categories-title-inline {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.categories-list {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap; 
+}
+
+.category-item {
+    text-decoration: none;
+    color: var(--primary-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1 1 20%; 
+    max-width: 25%;
+}
+
+.category-image-wrapper {
+    width: 100%;
+    max-width: 150px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.category-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.category-tag {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px; 
+    font-size: 0.9em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+
+/* --- Product Grid Rows Styling --- */
+.product-grid-row {
+    background-color: var(--card-bg-light);
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    display: grid;
+    /* Four columns for the product cards */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    border-radius: 8px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-image-wrapper {
+    padding: 10px;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 150px; 
+    height: auto;
+    object-fit: contain;
+}
+
+.product-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.product-rating {
+    color: var(--star-color);
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.product-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.buy-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 5px; 
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.buy-button:hover {
+    background-color: var(--accent-hover);
+}
+
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet/Medium Screens (Below 992px) */
+@media (max-width: 992px) {
+    .product-grid-row {
+        /* Change from 4 to 3 columns on tablets */
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .category-item {
+        flex: 1 1 23%; 
+        max-width: 25%;
+    }
+}
+
+/* Small Tablets/Large Mobile (Below 768px) */
+@media (max-width: 768px) {
+    .product-grid-row {
+        /* Change from 3 to 2 columns on mobile/small tablets */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .categories-list {
+        justify-content: space-evenly;
+        gap: 10px;
+    }
+    
+    .category-item {
+        flex: 1 1 40%; 
+        max-width: 45%;
+    }
+}
+
+/* Mobile/Small Screens (Below 576px) */
+@media (max-width: 576px) {
+    .controls-wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .category-item {
+        flex: 1 1 45%; 
+        max-width: 50%;
+        margin-bottom: 10px;
+    }
+    
+    .product-grid-row {
+        /* Stack cards in a single column for maximum readability */
+        grid-template-columns: 1fr;
+        padding: 15px 10px;
+    }
+}
+</style>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="logo">
+      Electro<span>Mart</span>
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <form class="search">
+      <input type="text" placeholder="Search" />
+      <button type="submit"></button>
+    </form>
+
+    <div class="top-actions">
+    
+      
+      <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+      <div class="profile-avatar">
+        <img src="images/image user profile 1.png" alt="User profile">
+      </div>
+      <!-- Mobile menu toggle -->
+      <button class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Secondary nav -->
+  <nav class="main-nav" id="mainNav">
+    <a href="home.html" class="nav-link active">Home</a>
+    <a href="blogs.html" class="nav-link">Blogs</a>
+    <a href="categories.html" class="nav-link">Categories</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+
+<section class="product-listing-section">
+    <div class="filter-sort-bar">
+        <h2 class="section-title">Product categories</h2>
+        <div class="controls-wrapper">
+            <div class="control-group">
+                <i class="control-icon" aria-hidden="true">☰</i> Filter
+            </div>
+            <div class="control-group">
+                <i class="control-icon" aria-hidden="true">⇅</i> Sort
+            </div>
+        </div>
+    </div>
+
+    <div class="categories-bar">
+        <h3 class="categories-title">Categories</h3>
+        <div class="categories-list">
+            
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/Laptob.png" alt="Laptops" class="category-image">
+                </div>
+                <span class="category-tag">Laptops</span>
+            </a>
+
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/Mobile combo set.png" alt="Smartphones" class="category-image">
+                </div>
+                <span class="category-tag">Smartphones</span>
+            </a>
+
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/Smart Watch.png" alt="Smartwatches" class="category-image">
+                </div>
+                <span class="category-tag">Smartwatches</span>
+            </a>
+
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/head band.png" alt="Accessories" class="category-image">
+                </div>
+                <span class="category-tag">Accessories</span>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                </div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                </div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                </div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                    <span class="star-filled">★</span>
+                </div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+    </div>
+</section>
+<section class="product-listing-section">
+   
+
+    <div class="categories-bar">
+     
+        <div class="categories-list">
+
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/Laptob.png" alt="Laptops" class="category-image">
+                </div>
+                <span class="category-tag">Laptops</span>
+            </a>
+
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/Laptob.png" alt="Smartphones" class="category-image">
+                </div>
+                <span class="category-tag">Smartphones</span>
+            </a>
+
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/Laptob.png" alt="Smartwatches" class="category-image">
+                </div>
+                <span class="category-tag">Smartwatches</span>
+            </a>
+
+            <a href="#" class="category-item">
+                <div class="category-image-wrapper">
+                    <img src="images/Laptob.png" alt="Accessories" class="category-image">
+                </div>
+                <span class="category-tag">Accessories</span>
+            </a>
+
+        </div>
+    </div>
+    
+    <div class="product-grid-row">
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/head band.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/head band.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/head band.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/head band.png" alt="iPhone" class="product-image">
+                </div>
+                <p class="product-name">iphone</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$899</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+    </div>
+
+    <div class="product-grid-row">
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Smart Watch.png" alt="Macbook air" class="product-image" onclick="window.location.href='watch.html'">
+                </div>
+                <p class="product-name">Macbook air</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$1000</p>
+            </div>
+            <button class="buy-button" onclick="window.location.href='watch.html'">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Smart Watch.png" alt="Macbook air" class="product-image">
+                </div>
+                <p class="product-name">Macbook air</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$1000</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Smart Watch.png" alt="Macbook air" class="product-image">
+                </div>
+                <p class="product-name">Macbook air</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$1000</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product-card">
+            <div class="card-content">
+                <div class="product-image-wrapper">
+                    <img src="images/Smart Watch.png" alt="Macbook air" class="product-image">
+                </div>
+                <p class="product-name">Macbook air</p>
+                <div class="product-rating">★★★★★</div>
+                <p class="product-price">$1000</p>
+            </div>
+            <button class="buy-button">Buy Now</button>
+        </div>
+    </div>
+</div>
+</section>
+ <!-- SUBSCRIBE -->
+ <section class="subscribe">
+    <h3>Subscribe</h3>
+    <p>Get the latest deals &amp; updates straight to your inbox</p>
+    <form class="subscribe-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+  
+  <!-- FOOTER -->
+  <footer class="em-footer">
+    <div class="footer-top">
+      <div class="footer-col brand">
+        <div class="footer-logo">
+          Electro<span>Mart</span>
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <p>Powering Your Life</p>
+        <p>One Gadget at a Time</p>
+      </div>
+  
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <a href="#">About Us</a>
+        <a href="#">Our Services</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms &amp; Condition</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CATEGORY</h4>
+        <a href="#">Smartphone</a>
+        <a href="#">Televisions</a>
+        <a href="#">Laptops</a>
+        <a href="#">Mobiles</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CONTACT US</h4>
+        <p>Any town, USA 12345</p>
+        <p>info@example.com</p>
+        <p>(123) 456-7890</p>
+      </div>
+    </div>
+  
+    <div class="footer-divider"></div>
+  
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <!-- replace with real icons/images -->
+        <span>○</span><span>○</span><span>○</span>
+      </div>
+      <p class="footer-copy">© 2025 ElectroMart. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script src="main.js"></script>
+</body>
+</html>

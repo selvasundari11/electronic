@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroMart</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    .order-confirmation-container {
+        --primary-color: #00bfff; /* Bright cyan/blue for button and icon */
+        --text-color: #333;
+        --detail-text-color: #555;
+        --font-family: Arial, sans-serif;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Optional: Center content vertically in the viewport */
+        padding: 20px;
+        font-family: var(--font-family);
+        color: var(--text-color);
+    }
+    
+    .confirmation-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+        padding: 30px;
+    }
+    
+    /* --- Success Icon Styling --- */
+    .success-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    
+    .success-icon {
+        color: white;
+        font-size: 3em;
+        line-height: 1;
+    }
+    
+    /* --- Text Styling --- */
+    .confirmation-title {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    .confirmation-message, .confirmation-detail {
+        font-size: 1em;
+        color: var(--detail-text-color);
+        margin-bottom: 5px;
+    }
+    
+    .email-info {
+        font-size: 1em;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    
+    /* --- Button Styling --- */
+    .continue-shopping-button {
+        padding: 15px 40px;
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        max-width: 250px;
+        transition: background-color 0.2s;
+        box-shadow: 0 4px 6px rgba(0, 191, 255, 0.3);
+    }
+    
+    .continue-shopping-button:hover {
+        background-color: #0099cc;
+    }
+    
+    /* --- Responsive Adaptations --- */
+    
+    @media (max-width: 480px) {
+        .confirmation-content {
+            padding: 20px;
+        }
+        
+        .success-icon-wrapper {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .success-icon {
+            font-size: 2.5em;
+        }
+    
+        .confirmation-title {
+            font-size: 1.5em;
+        }
+        
+        .continue-shopping-button {
+            padding: 12px 30px;
+            font-size: 0.95em;
+        }
+    }
+</style>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="logo">
+      Electro<span>Mart</span>
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <form class="search">
+      <input type="text" placeholder="Search" />
+      <button type="submit"></button>
+    </form>
+
+    <div class="top-actions">
+    
+      
+      <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+      <div class="profile-avatar">
+        <img src="images/image user profile 1.png" alt="User profile">
+      </div>
+      <!-- Mobile menu toggle -->
+      <button class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Secondary nav -->
+  <nav class="main-nav" id="mainNav">
+    <a href="home.html" class="nav-link active">Home</a>
+    <a href="blogs.html" class="nav-link">Blogs</a>
+    <a href="categories.html" class="nav-link">Categories</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+<section class="order-confirmation-container">
+    <div class="confirmation-content">
+        <div class="success-icon-wrapper">
+            <span class="success-icon" aria-hidden="true">✔</span>
+        </div>
+        
+        <h1 class="confirmation-title">Order Placed</h1>
+        
+        <p class="confirmation-message">Your order has been placed successfully</p>
+        <p class="confirmation-detail">Order #12345 has been confirmed</p>
+        
+        <p class="email-info">You will receive a confirmation email shortly</p>
+        
+        <button class="continue-shopping-button" onclick="window.location.href='categories.html'">Continue Shopping</button>
+    </div>
+</section>
+  <!-- SUBSCRIBE -->
+  <section class="subscribe">
+    <h3>Subscribe</h3>
+    <p>Get the latest deals &amp; updates straight to your inbox</p>
+    <form class="subscribe-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+  
+  <!-- FOOTER -->
+  <footer class="em-footer">
+    <div class="footer-top">
+      <div class="footer-col brand">
+        <div class="footer-logo">
+          Electro<span>Mart</span>
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <p>Powering Your Life</p>
+        <p>One Gadget at a Time</p>
+      </div>
+  
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <a href="#">About Us</a>
+        <a href="#">Our Services</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms &amp; Condition</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CATEGORY</h4>
+        <a href="#">Smartphone</a>
+        <a href="#">Televisions</a>
+        <a href="#">Laptops</a>
+        <a href="#">Mobiles</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CONTACT US</h4>
+        <p>Any town, USA 12345</p>
+        <p>info@example.com</p>
+        <p>(123) 456-7890</p>
+      </div>
+    </div>
+  
+    <div class="footer-divider"></div>
+  
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <!-- replace with real icons/images -->
+        <span>○</span><span>○</span><span>○</span>
+      </div>
+      <p class="footer-copy">© 2025 ElectroMart. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script src="main.js"></script>
+</body>
+</html>

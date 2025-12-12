@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroMart</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    /* --- Variables & Global Resets --- */
+:root {
+    --primary-text: #333;
+    --secondary-text: #555;
+    --link-color: #333;
+    --background-color: #fff;
+    --card-bg-light: #e0f7fa; /* Light cyan/blue for the main card background */
+    --border-color: #ccc;
+    --font-family: Arial, sans-serif;
+}
+
+/* Optional: Basic reset for better consistency */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Main Layout Container --- */
+.blog-container {
+    display: flex;
+    max-width: 1200px; /* Max width for large screens */
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: var(--font-family);
+    color: var(--primary-text);
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 250px; /* Fixed width for desktop */
+    padding-right: 40px;
+    flex-shrink: 0; /* Prevents sidebar from shrinking on large screens */
+}
+
+.section-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+.post-list, .category-list {
+    list-style: none;
+}
+
+.post-list li, .category-list li {
+    margin-bottom: 8px;
+}
+
+.post-list a, .category-list a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-size: 1.4em;
+    transition: color 0.2s;
+}
+
+.post-list a:hover, .category-list a:hover {
+    color: #007bff; /* Example hover color */
+    text-decoration: underline;
+}
+
+/* --- Main Content Styling --- */
+.main-content {
+    flex-grow: 1; /* Allows main content to take up remaining space */
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+    gap: 20px;
+}
+
+.main-title {
+    width: 100%; /* Takes full width above the cards */
+    font-size: 1.75em;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* --- Blog Card Styling --- */
+.blog-card {
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Featured/Main Card (Laptop) */
+.featured-card {
+    flex: 2 1 400px; /* Flex-grow, flex-shrink, flex-basis. Allows it to be wider */
+    background-color: var(--card-bg-light);
+    display: flex;
+    flex-direction: column; /* Stack image and info vertically */
+    align-items: center;
+    padding: 30px;
+    min-height: 450px; /* Ensure a decent height for the main card */
+}
+
+.card-image-wrapper {
+    width: 100%;
+    max-width: 350px; /* Control the size of the image placeholder */
+    margin-bottom: 20px;
+}
+
+.card-image {
+    /* The screenshot shows a stacked image of devices. 
+       This placeholder uses a simple styling that you would replace 
+       with a background image or a specific image component. */
+    width: 100%;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.1); 
+    /* The original image looks like a specific asset, so we'll use a placeholder */
+    /* **Replace 'placeholder-image-url' in HTML with your actual image path.** */
+    display: block;
+    object-fit: contain;
+}
+
+.card-info {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.card-category {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--secondary-text);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.card-snippet {
+    font-size: 1.4em;
+    color: var(--secondary-text);
+}
+
+/* Right Side Card (Gaming) */
+.side-card {
+    flex: 1 1 300px; /* Takes up less space than the featured card */
+    display: flex;
+    align-items: center;
+    /* This card in the screenshot appears to be just text to the right of the main image */
+}
+
+.gaming-info {
+    text-align: left;
+    /* Adjust text positioning for the side card */
+}
+
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet/Medium Screens (Below 1000px) */
+@media (max-width: 1000px) {
+    .sidebar {
+        width: 180px; /* Reduce sidebar width slightly */
+        padding-right: 20px;
+    }
+
+    .featured-card {
+        flex-basis: 100%; /* Main card takes full width */
+        min-height: auto;
+    }
+    
+    .side-card {
+        flex-basis: 100%; /* Side card moves to a new line and takes full width */
+    }
+
+    /* Change side card to match the text-on-the-right layout of the original image */
+    .side-card {
+        order: -1; /* Move the 'Blog Cards' title to the top */
+        padding: 0 0 0 20px;
+    }
+}
+
+/* Mobile/Small Screens (Below 768px) */
+@media (max-width: 768px) {
+    .blog-container {
+        flex-direction: column; /* Stack the sidebar and main content vertically */
+        padding: 0 15px;
+    }
+
+    .sidebar {
+        width: 100%; /* Sidebar takes full width */
+        padding-right: 0;
+        margin-bottom: 30px;
+        /* Optional: Change the layout of the sidebar sections */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .sidebar-section {
+        flex: 1 1 45%; /* Popular Posts and Categories side-by-side on mobile */
+        margin-bottom: 0;
+    }
+    
+    .section-title {
+        font-size: 1.1em;
+    }
+
+    .main-content {
+        gap: 15px;
+    }
+    
+    .main-title {
+        text-align: center;
+    }
+    
+    .featured-card {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.1em;
+    }
+    
+    /* Ensure the side card (Gaming) maintains its text style */
+    .side-card {
+        order: 1; /* Reset order */
+        padding: 0;
+        text-align: center;
+    }
+    
+    .gaming-info {
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="logo">
+      Electro<span>Mart</span>
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <form class="search">
+      <input type="text" placeholder="Search" />
+      <button type="submit"></button>
+    </form>
+
+    <div class="top-actions">
+    
+      
+      <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+      <div class="profile-avatar">
+        <img src="images/image user profile 1.png" alt="User profile">
+      </div>
+      <!-- Mobile menu toggle -->
+      <button class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Secondary nav -->
+  <nav class="main-nav" id="mainNav">
+    <a href="home.html" class="nav-link active">Home</a>
+    <a href="blogs.html" class="nav-link">Blogs</a>
+    <a href="categories.html" class="nav-link">Categories</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+<section class="blog-container">
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3 class="section-title">Popular Posts</h3>
+            <ul class="post-list">
+                <li><a href="#">Upcoming Flagship Phones</a></li>
+                <li><a href="#">How to Extend Your Laptop's Battery Life</a></li>
+                <li><a href="#">Smart Home Devices Worth Investing In</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="section-title">Categories</h3>
+            <ul class="category-list">
+                <li><a href="#">Smartphones</a></li>
+                <li><a href="#">Laptops</a></li>
+                <li><a href="#">Wearables</a></li>
+                <li><a href="#">Home Appliances</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <h2 class="main-title">Blog Cards</h2>
+
+        <div class="blog-card featured-card">
+            <div class="card-image-wrapper">
+                <img src="images/Mobile combo set.png" alt="Collection of modern tech devices: Laptop, Smartphone, and Smartwatch." class="card-image">
+            </div>
+
+            <div class="card-info laptop-info">
+                <span class="card-category">[Category] Laptops</span>
+                <h3 class="card-title">Title: Laptop Buying Guide: Key Features to Consider</h3>
+                <p class="card-snippet">Snippet: From processor to battery – here's what matters.</p>
+            </div>
+        </div>
+
+        <div class="blog-card side-card">
+            <div class="card-info gaming-info">
+                <span class="card-category">[Category] Gaming</span>
+                <h3 class="card-title">Title: Exploring the Latest Gaming Consoles</h3>
+                <p class="card-snippet">Snippet: PS5 vs Xbox vs Switch</p>
+            </div>
+        </div>
+    </main>
+</section>
+  <!-- SUBSCRIBE -->
+  <section class="subscribe">
+    <h3>Subscribe</h3>
+    <p>Get the latest deals &amp; updates straight to your inbox</p>
+    <form class="subscribe-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+  
+  <!-- FOOTER -->
+  <footer class="em-footer">
+    <div class="footer-top">
+      <div class="footer-col brand">
+        <div class="footer-logo">
+          Electro<span>Mart</span>
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <p>Powering Your Life</p>
+        <p>One Gadget at a Time</p>
+      </div>
+  
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <a href="#">About Us</a>
+        <a href="#">Our Services</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms &amp; Condition</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CATEGORY</h4>
+        <a href="#">Smartphone</a>
+        <a href="#">Televisions</a>
+        <a href="#">Laptops</a>
+        <a href="#">Mobiles</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CONTACT US</h4>
+        <p>Any town, USA 12345</p>
+        <p>info@example.com</p>
+        <p>(123) 456-7890</p>
+      </div>
+    </div>
+  
+    <div class="footer-divider"></div>
+  
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <!-- replace with real icons/images -->
+        <span>○</span><span>○</span><span>○</span>
+      </div>
+      <p class="footer-copy">© 2025 ElectroMart. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script src="main.js"></script>
+</body>
+</html>

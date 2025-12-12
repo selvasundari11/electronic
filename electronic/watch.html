@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroMart</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    /* --- Styling Variables (since :root is excluded, we use direct values) --- */
+.product-detail-container {
+    --primary-color: #00bfff; /* Bright cyan/blue for 'Buy Now' and bars */
+    --secondary-color: #333;
+    --background-light: #f0f8ff; /* Light blue/white background for image area */
+    --star-color: #ffc700;
+    --font-family: Arial, sans-serif;
+
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: var(--font-family);
+    color: var(--secondary-color);
+}
+
+/* --- Main Content (Image & Details Side-by-Side) --- */
+.product-main-content {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* --- Image Area --- */
+.product-image-area {
+    flex: 1 1 40%; /* Takes about 40% of the space on desktop */
+}
+
+.product-image-wrapper {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px; /* Fixed height for visual appeal */
+}
+
+.product-image {
+    max-width: 80%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- Details Area --- */
+.product-details-area {
+    flex: 1 1 60%; /* Takes about 60% of the space on desktop */
+}
+
+.product-name {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rating-summary {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.stars {
+    color: var(--star-color);
+    font-size: 1.2em;
+    margin-right: 10px;
+    line-height: 1;
+}
+
+.reviews {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.product-price {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.product-description {
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.product-description p {
+    margin-bottom: 10px;
+}
+
+/* --- Action Buttons --- */
+.action-buttons-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.action-buttons-group button {
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+    max-width: 180px; /* Constrain button width */
+}
+
+.add-to-cart-button {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    transition: background-color 0.2s;
+}
+
+.buy-now-button {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.buy-now-button:hover {
+    background-color: #0099cc;
+}
+
+
+/* --- Bottom Details (Details & Reviews) --- */
+.product-extra-info {
+    display: flex;
+    gap: 30px;
+}
+
+.product-specs-card, .customer-reviews-card {
+    flex: 1 1 50%;
+}
+
+/* --- Product Details List --- */
+.specs-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.specs-list {
+    list-style: disc inside;
+    padding-left: 20px;
+    line-height: 1.6;
+}
+
+.specs-list li {
+    margin-bottom: 10px;
+}
+
+/* --- Customer Reviews --- */
+.reviews-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.rating-breakdown-header {
+    margin-bottom: 20px;
+}
+
+.review-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.star-label {
+    width: 60px; /* Fixed width for alignment */
+    font-size: 0.9em;
+}
+
+.bar-fill {
+    height: 10px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    flex-grow: 1; /* Allow bars to fill remaining space */
+}
+
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet and Smaller Desktop (Below 992px) */
+@media (max-width: 992px) {
+    .product-main-content {
+        gap: 20px;
+    }
+
+    .product-name {
+        font-size: 1.8em;
+    }
+}
+
+/* Mobile Devices (Below 768px) */
+@media (max-width: 768px) {
+    /* Stack main content vertically */
+    .product-main-content {
+        flex-direction: column;
+    }
+
+    .product-details-area {
+        text-align: center;
+    }
+    
+    .rating-summary {
+        justify-content: center;
+    }
+
+    .action-buttons-group {
+        justify-content: center;
+    }
+
+    /* Stack bottom sections vertically */
+    .product-extra-info {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .product-specs-card, .customer-reviews-card {
+        text-align: center;
+    }
+    
+    .specs-list {
+        list-style: none; /* Remove bullet points on mobile for better centering */
+        padding-left: 0;
+    }
+    
+    .specs-list li {
+        text-align: left; /* Align text within the list item */
+        margin: 0 auto 10px auto; /* Center list items if possible */
+        max-width: 350px;
+    }
+
+    .review-bars {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+</style>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="logo">
+      Electro<span>Mart</span>
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <form class="search">
+      <input type="text" placeholder="Search" />
+      <button type="submit"></button>
+    </form>
+
+    <div class="top-actions">
+    
+      
+      <button class="icon-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+      <div class="profile-avatar">
+        <img src="images/image user profile 1.png" alt="User profile">
+      </div>
+      <!-- Mobile menu toggle -->
+      <button class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Secondary nav -->
+  <nav class="main-nav" id="mainNav">
+    <a href="home.html" class="nav-link active">Home</a>
+    <a href="blogs.html" class="nav-link">Blogs</a>
+    <a href="categories.html" class="nav-link">Categories</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+<section class="product-detail-container">
+    <div class="product-main-content">
+        <div class="product-image-area">
+            <div class="product-image-wrapper">
+                <img src="images/Smart Watch.png" alt="SmartFit Pro Watch" class="product-image">
+            </div>
+        </div>
+
+        <div class="product-details-area">
+            <h1 class="product-name">SmartFit Pro Watch</h1>
+            
+            <div class="rating-summary">
+                <span class="stars">★★★★☆</span>
+                <span class="reviews">(4,500 reviews)</span>
+            </div>
+
+            <p class="product-price">$899</p>
+            
+            <div class="product-description">
+                <p>Track. Connect. Elevate.</p>
+                <p>Stay ahead of your health and schedule with the SmartFit Pro Watch — a perfect fusion of style and functionality. Designed for modern lifestyles, this smartwatch helps you monitor your fitness, stay connected, and manage your day seamlessly from your wrist.</p>
+            </div>
+            
+            <div class="action-buttons-group">
+                <button onclick="window.location.href='addtocart.html'">Add to Cart</button>
+
+
+                  
+                <button class="buy-now-button"onclick="window.location.href='checkout.html'">Buynow</button>
+            </div>
+       
+
+    <div class="product-extra-info">
+        
+        <div class="product-specs-card">
+            <h2 class="specs-title">Product Details – SmartFit Pro Watch</h2>
+            <ul class="specs-list">
+                <li>Track heart rate, sleep quality, steps, and calories burned with precision sensors</li>
+                <li>Instantly receive calls, texts, and app alerts with vibration feedback.</li>
+                <li>Enjoy up to 10 days on a single charge.</li>
+            </ul>
+        </div>
+
+        <div class="customer-reviews-card">
+            <h2 class="reviews-title">Customers Reviews</h2>
+            
+            <div class="rating-breakdown-header">
+                <span class="stars">★★★★☆</span>
+                <span class="reviews-count">(4,500 reviews)</span>
+            </div>
+
+            <div class="review-bars">
+                <div class="review-bar-item">
+                    <span class="star-label">5 star</span>
+                    <div class="bar-fill" style="width: 80%;"></div>
+                </div>
+                <div class="review-bar-item">
+                    <span class="star-label">4 star</span>
+                    <div class="bar-fill" style="width: 60%;"></div>
+                </div>
+                <div class="review-bar-item">
+                    <span class="star-label">3 star</span>
+                    <div class="bar-fill" style="width: 45%;"></div>
+                </div>
+                <div class="review-bar-item">
+                    <span class="star-label">2 star</span>
+                    <div class="bar-fill" style="width: 70%;"></div>
+                </div>
+                </div>
+        </div>
+    </div>
+</section>
+  <!-- SUBSCRIBE -->
+  <section class="subscribe">
+    <h3>Subscribe</h3>
+    <p>Get the latest deals &amp; updates straight to your inbox</p>
+    <form class="subscribe-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+  
+  <!-- FOOTER -->
+  <footer class="em-footer">
+    <div class="footer-top">
+      <div class="footer-col brand">
+        <div class="footer-logo">
+          Electro<span>Mart</span>
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <p>Powering Your Life</p>
+        <p>One Gadget at a Time</p>
+      </div>
+  
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <a href="#">About Us</a>
+        <a href="#">Our Services</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms &amp; Condition</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CATEGORY</h4>
+        <a href="#">Smartphone</a>
+        <a href="#">Televisions</a>
+        <a href="#">Laptops</a>
+        <a href="#">Mobiles</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CONTACT US</h4>
+        <p>Any town, USA 12345</p>
+        <p>info@example.com</p>
+        <p>(123) 456-7890</p>
+      </div>
+    </div>
+  
+    <div class="footer-divider"></div>
+  
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <!-- replace with real icons/images -->
+        <span>○</span><span>○</span><span>○</span>
+      </div>
+      <p class="footer-copy">© 2025 ElectroMart. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroMart</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="logo">
+      Electro<span>Mart</span>
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <form class="search">
+      <input type="text" placeholder="Search" />
+      <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+
+    <div class="top-actions">
+      <button class="btn-outline">Login</button>
+      <button class="btn-outline">Signup</button>
+
+      <button class="icon-btn"><i class="fa-solid fa-cart-shopping" onclick="window.location.href='addtocart.html'"></i></button>
+      <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+      <span class="top-support">24/7&nbsp;<i class="fa-solid fa-headset"></i></span>
+
+      <!-- Mobile menu toggle -->
+      <button class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Secondary nav -->
+  <nav class="main-nav" id="mainNav">
+    <a href="home.html" class="nav-link active">Home</a>
+    <a href="blogs.html" class="nav-link">Blogs</a>
+    <a href="categories.html" class="nav-link">Categories</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </nav>
+
+  <!-- Hero section -->
+  <main class="hero">
+    <section class="hero-text">
+      <h1>Upgrade Your Tech Life</h1>
+      <h2>Top Deals on Smartphones Laptops Smartwatches &amp; More</h2>
+      <p>
+        Discover the best deals on smartphones, laptops, smartwatches and accessories in one place.
+        Whether you are upgrading your work setup or staying ahead with the latest gadgets,
+        ElectroMart has you covered with great prices and trusted brands.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary" onclick="window.location.href='categories.html'">Shop Now</a>
+        <a href="#" class="btn-dark"  onclick="window.location.href='categories.html'">Explore Now</a>
+      </div>
+    </section>
+
+    <section class="hero-image">
+      <!-- Replace with your real image -->
+      <img src="images/Mobile combo set.png"
+           alt="Smartphone, laptop and smartwatch" />
+    </section>
+  </main>
+  <section class="upcoming-arrivals">
+    <h2>Electro Mart Upcoming Arrivals</h2>
+  
+    <div class="arrivals-track">
+      <div class="arrival-card"><img src="images/head band.png" alt="Product 1"></div>
+      <div class="arrival-card"><img src="images/Frame 85.png" alt="Product 2"></div>
+      <div class="arrival-card"><img src="images/Frame 88.png" alt="Product 3"></div>
+      <div class="arrival-card"><img src="images/Frame 89.png" alt="Product 4"></div>
+      <div class="arrival-card"><img src="images/Frame 95.png" alt="Product 5"></div>
+    </div>
+  </section>
+  <section class="products-container">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+            </div>
+            <h3 class="product-name">iPhone</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+            </div>
+            <h3 class="product-name">iPhone</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+            </div>
+            <h3 class="product-name">iPhone</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Smart Watch.png" alt="Apple watch" class="product-image" onclick="window.location.href='watch.html'">
+            </div>
+            <h3 class="product-name">Apple watch</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn" onclick="window.location.href='watch.html'">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Smart Watch.png" alt="Apple watch" class="product-image" onclick="window.location.href='watch.html'">
+            </div>
+            <h3 class="product-name">Apple watch</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn" onclick="window.location.href='watch.html'">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Smart Watch.png" alt="Apple watch" class="product-image" onclick="window.location.href='watch.html'">
+            </div>
+            <h3 class="product-name">Apple watch</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn" onclick="window.location.href='watch.html'">Add to cart</button>
+        </div>
+
+    </div>
+
+    <h2 class="section-title product-categories-title">Product categories</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Iphone 1.png" alt="Smart phone" class="product-image">
+            </div>
+            <h3 class="product-name">Smart phone</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Laptob.png" alt="Mac book" class="product-image">
+            </div>
+            <h3 class="product-name">Mac book</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+        
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/head band.png" alt="Accessories" class="product-image">
+            </div>
+            <h3 class="product-name">Accessories</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Smart Watch.png" alt="Apple watch" class="product-image" onclick="window.location.href='watch.html'">
+            </div>
+            <h3 class="product-name">Apple watch</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn" onclick="window.location.href='watch.html'">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Iphone 2.png" alt="iPhone" class="product-image">
+            </div>
+            <h3 class="product-name">iPhone</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$899</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-bg">
+                <img src="images/Mobile combo set.png" alt="Combo sets" class="product-image">
+            </div>
+            <h3 class="product-name">Combo sets</h3>
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+            <p class="product-price">$1,580</p>
+            <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+    </div>
+</section>
+<!-- WHY CHOOSE -->
+<section class="why-choose">
+    <h3>Why Choose ElectroMart?</h3>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">
+          <img src="images/desktop.jpeg" alt="Latest Tech">
+        </div>
+        <p class="why-title">Latest Tech</p>
+      </div>
+  
+      <div class="why-item">
+        <div class="why-icon">
+          <img src="images/delivery.jpeg" alt="Fast & Free Delivery">
+        </div>
+        <p class="why-title">Fast &amp; Free Delivery</p>
+      </div>
+  
+      <div class="why-item">
+        <div class="why-icon">
+          <img src="images/returns.jpeg" alt="Easy Returns">
+        </div>
+        <p class="why-title">Easy Returns</p>
+      </div>
+  
+      <div class="why-item">
+        <div class="why-icon">
+          <img src="images/lock.jpeg" alt="Secure Checkout">
+        </div>
+        <p class="why-title">Secure Checkout</p>
+      </div>
+    </div>
+  </section>
+  
+  
+<!-- CUSTOMER REVIEWS -->
+<section class="reviews">
+    <h3>Customer Reviews</h3>
+    <div class="reviews-row">
+      <article class="review-card">
+        <div class="avatar">
+          <img src="images/image user profile 2.png" alt="Aman P.">
+        </div>
+        <h4>Aman P.</h4>
+        <p class="stars">⭐⭐⭐⭐⭐</p>
+        <p class="review-text">Fast shipping and excellent!</p>
+      </article>
+  
+      <article class="review-card">
+        <div class="avatar">
+          <img src="images/image user profile 2.png" alt="Aman P.">
+        </div>
+        <h4>Aman P.</h4>
+        <p class="stars">⭐⭐⭐⭐⭐</p>
+        <p class="review-text">Fast shipping and excellent!</p>
+      </article>
+  
+      <article class="review-card">
+        <div class="avatar">
+          <img src="images/image user profile 2.png" alt="Aman P.">
+        </div>
+        <h4>Aman P.</h4>
+        <p class="stars">⭐⭐⭐⭐⭐</p>
+        <p class="review-text">Fast shipping and excellent!</p>
+      </article>
+    </div>
+  </section>
+  
+  
+  <!-- SUBSCRIBE -->
+  <section class="subscribe">
+    <h3>Subscribe</h3>
+    <p>Get the latest deals &amp; updates straight to your inbox</p>
+    <form class="subscribe-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+  
+  <!-- FOOTER -->
+  <footer class="em-footer">
+    <div class="footer-top">
+      <div class="footer-col brand">
+        <div class="footer-logo">
+          Electro<span>Mart</span>
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <p>Powering Your Life</p>
+        <p>One Gadget at a Time</p>
+      </div>
+  
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <a href="#">About Us</a>
+        <a href="#">Our Services</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms &amp; Condition</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CATEGORY</h4>
+        <a href="#">Smartphone</a>
+        <a href="#">Televisions</a>
+        <a href="#">Laptops</a>
+        <a href="#">Mobiles</a>
+      </div>
+  
+      <div class="footer-col">
+        <h4>CONTACT US</h4>
+        <p>Any town, USA 12345</p>
+        <p>info@example.com</p>
+        <p>(123) 456-7890</p>
+      </div>
+    </div>
+  
+    <div class="footer-divider"></div>
+  
+    <div class="footer-bottom">
+      <div class="footer-social">
+        <!-- replace with real icons/images -->
+        <span>○</span><span>○</span><span>○</span>
+      </div>
+      <p class="footer-copy">© 2025 ElectroMart. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script src="main.js"></script>
+</body>
+</html>
